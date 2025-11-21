@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   /* Premium Palette: Terracotta & Warm Neutral */
   --primary: #E2725B;

@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import styles from "./page.module.css";
 
 export default function Dashboard() {
@@ -11,6 +13,8 @@ export default function Dashboard() {
 
     const progress = Math.round((tasksCompleted / tasksTotal) * 100);
     const budgetProgress = Math.round((budgetSpent / budgetTotal) * 100);
+    const [partnerName, setPartnerName] = useState("");
+    const [partnerAdded, setPartnerAdded] = useState(false);
 
     return (
         <div className={styles.container}>
@@ -25,9 +29,9 @@ export default function Dashboard() {
                 </div>
             </header>
 
-            <div className={styles.grid}>
+            <div className="grid grid-cols-2 gap-10 mb-4">
                 {/* Budget Card */}
-                <Link href="/budget" className={styles.card}>
+                <Link href="/budget" className="card rounded-sm">
                     <div className={styles.cardHeader}>
                         <h3>Budget</h3>
                         <span className={styles.icon}>💰</span>
@@ -45,7 +49,7 @@ export default function Dashboard() {
                 </Link>
 
                 {/* Checklist Card */}
-                <Link href="/checklist" className={styles.card}>
+                <Link href="/checklist" className="card rounded-sm">
                     <div className={styles.cardHeader}>
                         <h3>Checklist</h3>
                         <span className={styles.icon}>✅</span>
@@ -63,7 +67,7 @@ export default function Dashboard() {
                 </Link>
 
                 {/* Guest List Card */}
-                <div className={styles.card}>
+                <div className="card rounded-sm">
                     <div className={styles.cardHeader}>
                         <h3>Guests</h3>
                         <span className={styles.icon}>👥</span>
@@ -85,6 +89,17 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
+
+                {/* Vendors Card */}
+                <Link href="/vendors" className="card rounded-sm">
+                    <div className={styles.cardHeader}>
+                        <h3>Vendors</h3>
+                        <span className={styles.icon}>🏪</span>
+                    </div>
+                    <div className={styles.cardBody}>
+                        <p className={styles.subtext}>Manage your vendors</p>
+                    </div>
+                </Link>
             </div>
         </div>
     );

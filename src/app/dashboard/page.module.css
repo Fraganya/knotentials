@@ -1,5 +1,5 @@
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: var(--spacing-xl) var(--spacing-md);
 }
@@ -45,40 +45,7 @@
     opacity: 0.9;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-lg);
-}
 
-.card {
-    background: var(--surface);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary-light);
-}
-
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cardHeader h3 {
-    font-size: 1.25rem;
-    color: var(--text-main);
-}
 
 .icon {
     font-size: 1.5rem;
@@ -118,6 +85,41 @@
 .subtext {
     font-size: 0.875rem;
     color: var(--text-muted);
+}
+
+/* Partner Form Styles */
+.partnerForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.partnerInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    background: var(--surface);
+    color: var(--text-main);
+}
+
+.partnerButton {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.partnerButton:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
 .guestStats {

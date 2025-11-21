@@ -9,11 +9,11 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.hero}>
           <div className={styles.logoContainer}>
-            <Image 
-              src={icon} 
-              alt="Knotentials Logo" 
-              width={80} 
-              height={80} 
+            <Image
+              src={icon}
+              alt="Knotentials Logo"
+              width={80}
+              height={80}
               className={styles.logo}
               priority
             />
@@ -46,6 +46,10 @@ export default function Home() {
           <div className={styles.separator}>•</div>
           <div className={styles.featureItem}>
             <h3>Guests</h3>
+          </div>
+          <div className={styles.separator}>•</div>
+          <div className={styles.featureItem}>
+            <h3>Vendors</h3>
           </div>
         </div>
       </main>

@@ -4,70 +4,89 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 0%, #f4f1ea 0%, var(--background) 100%);
+  background: var(--background);
 }
 
 .main {
   width: 100%;
-  max-width: 1200px;
+  max-width: 800px;
   padding: var(--spacing-2xl) var(--spacing-md);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-2xl);
+  text-align: center;
 }
 
 .hero {
-  text-align: center;
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   animation: fadeIn 1s ease-out;
 }
 
-.title {
-  font-size: 4rem;
-  margin-bottom: var(--spacing-md);
-  letter-spacing: -0.02em;
+.logoContainer {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
 }
 
-.highlight {
-  color: var(--primary);
-  font-style: italic;
+.logo {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.03em;
+  color: var(--primary-dark);
+  font-weight: 500;
 }
 
 .subtitle {
   font-size: 1.25rem;
   color: var(--text-muted);
-  margin-bottom: var(--spacing-xl);
-  line-height: 1.6;
+  margin-bottom: var(--spacing-2xl);
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
 .ctaGroup {
   display: flex;
   gap: var(--spacing-md);
   justify-content: center;
+  width: 100%;
 }
 
 .features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: var(--spacing-lg);
-  width: 100%;
   margin-top: var(--spacing-xl);
+  color: var(--text-light);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.features h3 {
-  margin-bottom: var(--spacing-sm);
-  color: var(--primary);
+.featureItem h3 {
+  font-size: inherit;
+  font-weight: 500;
+  color: inherit;
+  margin: 0;
+  font-family: var(--font-sans);
 }
 
-.features p {
-  color: var(--text-muted);
+.separator {
+  color: var(--primary-light);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
 
   to {
@@ -76,12 +95,13 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .title {
     font-size: 2.5rem;
   }
-
+  
   .features {
-    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    font-size: 0.75rem;
   }
 }

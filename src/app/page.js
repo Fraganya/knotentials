@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import icon from "./icon.png";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -6,16 +8,26 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.hero}>
+          <div className={styles.logoContainer}>
+            <Image 
+              src={icon} 
+              alt="Knotentials Logo" 
+              width={80} 
+              height={80} 
+              className={styles.logo}
+              priority
+            />
+          </div>
           <h1 className={styles.title}>
-            Plan Your <span className={styles.highlight}>Perfect</span> Wedding
+            Knotentials
           </h1>
           <p className={styles.subtitle}>
-            From "Yes" to "I Do", Knotentials guides you through every step of your journey.
+            Plan Your Perfect Wedding
           </p>
 
           <div className={styles.ctaGroup}>
             <Link href="/signup" className="btn btn-primary">
-              Start Planning Free
+              Start Planning
             </Link>
             <Link href="/login" className="btn btn-outline">
               Log In
@@ -24,17 +36,16 @@ export default function Home() {
         </div>
 
         <div className={styles.features}>
-          <div className="card">
-            <h3>Budget Planner</h3>
-            <p>Track every penny with our intuitive budget management tool.</p>
+          <div className={styles.featureItem}>
+            <h3>Budget</h3>
           </div>
-          <div className="card">
-            <h3>A-Z Checklist</h3>
-            <p>Never miss a detail with our comprehensive wedding checklist.</p>
+          <div className={styles.separator}>•</div>
+          <div className={styles.featureItem}>
+            <h3>Checklist</h3>
           </div>
-          <div className="card">
-            <h3>Guest List</h3>
-            <p>Manage your guest list and RSVPs in one beautiful place.</p>
+          <div className={styles.separator}>•</div>
+          <div className={styles.featureItem}>
+            <h3>Guests</h3>
           </div>
         </div>
       </main>

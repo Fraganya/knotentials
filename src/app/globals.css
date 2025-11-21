@@ -1,27 +1,34 @@
 :root {
-  /* Premium Palette: Modern Sage & Gold */
-  --primary: #5D7052; /* Sage Green */
-  --primary-dark: #4A5A41;
-  --primary-light: #84A98C;
-  
-  --secondary: #D4AF37; /* Muted Gold */
-  --secondary-light: #F4D06F;
-  
-  --background: #F9F7F2; /* Warm Ivory */
+  /* Premium Palette: Terracotta & Warm Neutral */
+  --primary: #E2725B;
+  /* Terracotta */
+  --primary-dark: #C05640;
+  /* Burnt Sienna */
+  --primary-light: #F4A492;
+  /* Soft Terra */
+
+  --secondary: #D2B48C;
+  /* Warm Sand */
+  --secondary-light: #E6CCAA;
+
+  --background: #FDFBF7;
+  /* Cream */
   --surface: #FFFFFF;
-  --surface-hover: #F5F5F5;
-  
-  --text-main: #2C3E50;
-  --text-muted: #64748B;
-  --text-light: #94A3B8;
-  
-  --border: #E2E8F0;
-  --border-focus: #5D7052;
-  
+  --surface-hover: #F9F5F0;
+
+  --text-main: #4A3728;
+  /* Dark Earth */
+  --text-muted: #8D7B68;
+  /* Taupe */
+  --text-light: #B0A090;
+
+  --border: #E6DCC8;
+  --border-focus: #E2725B;
+
   --success: #10B981;
   --error: #EF4444;
   --warning: #F59E0B;
-  
+
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -29,19 +36,19 @@
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
-  
+
   /* Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-full: 9999px;
-  
+
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+  --shadow-sm: 0 1px 2px 0 rgb(74 55 40 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(74 55 40 / 0.1), 0 2px 4px -2px rgb(74 55 40 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(74 55 40 / 0.1), 0 4px 6px -4px rgb(74 55 40 / 0.1);
+  --shadow-premium: 0 20px 25px -5px rgb(74 55 40 / 0.1), 0 8px 10px -6px rgb(74 55 40 / 0.1);
+
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -69,7 +76,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   font-weight: 600;
   line-height: 1.2;

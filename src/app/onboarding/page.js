@@ -28,7 +28,9 @@ export default function Onboarding() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.card}>
+            <div className={styles.formWrapper}>
+
+
                 <div className={styles.progress}>
                     <div className={`${styles.step} ${step >= 1 ? styles.active : ""}`}>1</div>
                     <div className={styles.line}></div>
@@ -49,7 +51,7 @@ export default function Onboarding() {
                                     id="partnerName"
                                     value={formData.partnerName}
                                     onChange={handleChange}
-                                    placeholder="Name"
+                                    placeholder="Enter partner's name"
                                     required
                                     autoFocus
                                 />
@@ -94,7 +96,7 @@ export default function Onboarding() {
                         </div>
                     )}
 
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className={styles.submitButton}>
                         {step === 3 ? "Finish Setup" : "Next"}
                     </button>
                 </form>

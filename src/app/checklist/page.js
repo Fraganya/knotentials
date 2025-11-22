@@ -680,22 +680,45 @@ export default function Checklist() {
         );
     }
 
+    // Calculate overall progress
+    const totalTasks = items.reduce((sum, item) => sum + (item.actionItems?.length || 0), 0);
+    const completedTasks = items.reduce((sum, item) =>
+        sum + (item.actionItems?.filter(a => a.completed).length || 0), 0
+    );
+    const overallProgress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
             <header className="bg-primary/2 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 py-4">
                     <div className="max-w-3xl mx-auto">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div className="flex items-center gap-4 flex-1">
-                                <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
-                                    <IconChevronLeft className="w-6 h-6" />
-                                </Link>
-                                <div>
-                                    <h1 className="text-3xl font-bold text-primary mb-1">Wedding Checklist</h1>
-                                    <p className="text-base-content/60">Stay organized from A to Z</p>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                <div className="flex items-center gap-4 flex-1">
+                                    <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
+                                        <IconChevronLeft className="w-6 h-6" />
+                                    </Link>
+                                    <div>
+                                        <h1 className="text-3xl font-bold text-primary mb-1">Wedding Checklist</h1>
+                                        <p className="text-base-content/60">Stay organized from A to Z</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-3 items-center">
+                                    <div className="bg-base-100 px-4 py-2 rounded-xl shadow-sm border border-base-200 flex items-center gap-3">
+                                        <div className="flex flex-col">
+                                            <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Progress</span>
+                                            <span className="text-lg font-bold text-base-content">
+                                                {completedTasks} / {totalTasks}
+                                            </span>
+                                        </div>
+                                        <div className="w-px h-8 bg-base-200"></div>
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-2xl font-bold text-primary">{overallProgress}%</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="relative w-full md:w-64">
+                            <div className="relative w-full">
                                 <input
                                     type="text"
                                     placeholder="Search checklist..."
@@ -727,7 +750,7 @@ export default function Checklist() {
                     )}
                 </div>
 
-                <div className={searchTerm ? "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-start" : "max-w-3xl mx-auto"}>
+                <div className="max-w-3xl mx-auto flex flex-col gap-6">
                     {filteredItems.map((item) => {
                         const progress = calculateProgress(item.actionItems);
                         const isExpanded = !searchTerm ? true : item.expanded;

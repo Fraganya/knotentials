@@ -52,13 +52,13 @@ export default function Dashboard() {
                 // Fetch budget items to calculate spent amount
                 const { data: budgetItems } = await supabase
                     .from('budget_items')
-                    .select('amount, is_paid')
-                    .eq('wedding_id', weddingData.id);
+                    .select('cost, paid')
+                    .eq('user_id', user.id);
 
                 if (budgetItems) {
                     const spent = budgetItems
-                        .filter(item => item.is_paid)
-                        .reduce((sum, item) => sum + (item.amount || 0), 0);
+                        .filter(item => item.paid)
+                        .reduce((sum, item) => sum + (item.cost || 0), 0);
                     setBudgetSpent(spent);
                 }
 

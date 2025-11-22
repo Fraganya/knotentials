@@ -9,7 +9,14 @@ const DEFAULT_ITEMS = [
     {
         id: "A",
         title: "Church Registration",
-        details: [],
+        details: [
+            { label: "Wedding Date & Time", value: "" },
+            { label: "Church Name", value: "" },
+            { label: "Liaison/Contact", value: "" },
+            { label: "Announcements Start Date", value: "" },
+            { label: "Counselling Schedule", value: "" },
+            { label: "Rehearsal Schedule", value: "" }
+        ],
         actionItems: [
             { text: "Register at church", completed: false },
             { text: "Attend pre-marriage counseling", completed: false },
@@ -19,7 +26,12 @@ const DEFAULT_ITEMS = [
     {
         id: "B",
         title: "Attire & Dressing",
-        details: [],
+        details: [
+            { label: "Bride Dress Status", value: "" },
+            { label: "Groom Suit Status", value: "" },
+            { label: "Bridesmaids Dresses", value: "" },
+            { label: "Groomsmen Suits", value: "" }
+        ],
         actionItems: [
             { text: "Shop for wedding dress/suit", completed: false },
             { text: "Arrange bridesmaids dresses", completed: false },
@@ -29,7 +41,10 @@ const DEFAULT_ITEMS = [
     {
         id: "C",
         title: "Accommodation",
-        details: [],
+        details: [
+            { label: "Bridal Party Accommodation", value: "" },
+            { label: "Guest Accommodation", value: "" }
+        ],
         actionItems: [
             { text: "Book accommodation for bridal party", completed: false },
             { text: "Arrange guest accommodation", completed: false }
@@ -38,7 +53,12 @@ const DEFAULT_ITEMS = [
     {
         id: "D",
         title: "Reception Venue",
-        details: [],
+        details: [
+            { label: "Venue Name", value: "" },
+            { label: "Contact Person", value: "" },
+            { label: "Seating Capacity", value: "" },
+            { label: "Venue Cost", value: "" }
+        ],
         actionItems: [
             { text: "Book reception venue", completed: false },
             { text: "Confirm seating capacity", completed: false }
@@ -47,7 +67,11 @@ const DEFAULT_ITEMS = [
     {
         id: "E",
         title: "Decoration",
-        details: [],
+        details: [
+            { label: "Decorator Name", value: "" },
+            { label: "Color Scheme", value: "" },
+            { label: "Decoration Cost", value: "" }
+        ],
         actionItems: [
             { text: "Hire decorator", completed: false },
             { text: "Choose color scheme", completed: false }
@@ -56,7 +80,11 @@ const DEFAULT_ITEMS = [
     {
         id: "F",
         title: "Wedding Cake",
-        details: [],
+        details: [
+            { label: "Cake Provider", value: "" },
+            { label: "Cake Cost", value: "" },
+            { label: "Cake Details", value: "" }
+        ],
         actionItems: [
             { text: "Order wedding cake", completed: false },
             { text: "Schedule cake tasting", completed: false }
@@ -65,7 +93,9 @@ const DEFAULT_ITEMS = [
     {
         id: "G",
         title: "Cake Sharing",
-        details: [],
+        details: [
+            { label: "Couples for Cake Sharing", value: "" }
+        ],
         actionItems: [
             { text: "Arrange cake sharing couples", completed: false }
         ]
@@ -73,7 +103,11 @@ const DEFAULT_ITEMS = [
     {
         id: "H",
         title: "Bridal Party",
-        details: [],
+        details: [
+            { label: "Total Members", value: "" },
+            { label: "Best Man", value: "" },
+            { label: "Maid of Honor", value: "" }
+        ],
         actionItems: [
             { text: "Select bridal party members", completed: false },
             { text: "Confirm availability", completed: false }
@@ -82,7 +116,10 @@ const DEFAULT_ITEMS = [
     {
         id: "I",
         title: "Transport",
-        details: [],
+        details: [
+            { label: "Wedding Car Provider", value: "" },
+            { label: "Transport Cost", value: "" }
+        ],
         actionItems: [
             { text: "Book wedding car", completed: false },
             { text: "Arrange guest transport", completed: false }
@@ -91,7 +128,11 @@ const DEFAULT_ITEMS = [
     {
         id: "J",
         title: "Invitation Cards",
-        details: [],
+        details: [
+            { label: "Designer/Printer", value: "" },
+            { label: "Quantity", value: "" },
+            { label: "Cost", value: "" }
+        ],
         actionItems: [
             { text: "Design invitations", completed: false },
             { text: "Print and distribute invitations", completed: false }
@@ -100,7 +141,12 @@ const DEFAULT_ITEMS = [
     {
         id: "K",
         title: "Catering & Snacks",
-        details: [],
+        details: [
+            { label: "Caterer Name", value: "" },
+            { label: "Number of Guests", value: "" },
+            { label: "Menu", value: "" },
+            { label: "Catering Cost", value: "" }
+        ],
         actionItems: [
             { text: "Hire caterer", completed: false },
             { text: "Plan menu", completed: false }
@@ -109,7 +155,10 @@ const DEFAULT_ITEMS = [
     {
         id: "L",
         title: "Beverages",
-        details: [],
+        details: [
+            { label: "Drinks Quantity", value: "" },
+            { label: "Drinks Cost", value: "" }
+        ],
         actionItems: [
             { text: "Order drinks", completed: false },
             { text: "Arrange coolers and ice", completed: false }
@@ -118,7 +167,10 @@ const DEFAULT_ITEMS = [
     {
         id: "M",
         title: "Traditional Ceremony",
-        details: [],
+        details: [
+            { label: "Venue", value: "" },
+            { label: "Date & Time", value: "" }
+        ],
         actionItems: [
             { text: "Plan traditional ceremony", completed: false },
             { text: "Arrange catering", completed: false }
@@ -127,7 +179,12 @@ const DEFAULT_ITEMS = [
     {
         id: "N",
         title: "Photography & Videography",
-        details: [],
+        details: [
+            { label: "Photographer Name", value: "" },
+            { label: "Videographer Name", value: "" },
+            { label: "Photography Cost", value: "" },
+            { label: "Videography Cost", value: "" }
+        ],
         actionItems: [
             { text: "Book photographer", completed: false },
             { text: "Book videographer", completed: false }
@@ -136,7 +193,11 @@ const DEFAULT_ITEMS = [
     {
         id: "O",
         title: "Entertainment",
-        details: [],
+        details: [
+            { label: "DJ Name", value: "" },
+            { label: "MC Name", value: "" },
+            { label: "Entertainment Cost", value: "" }
+        ],
         actionItems: [
             { text: "Book DJ", completed: false },
             { text: "Book MC", completed: false }
@@ -145,7 +206,11 @@ const DEFAULT_ITEMS = [
     {
         id: "P",
         title: "Security",
-        details: [],
+        details: [
+            { label: "Security Provider", value: "" },
+            { label: "Number of Officers", value: "" },
+            { label: "Security Cost", value: "" }
+        ],
         actionItems: [
             { text: "Arrange security", completed: false }
         ]
@@ -153,7 +218,10 @@ const DEFAULT_ITEMS = [
     {
         id: "Q",
         title: "Ushers",
-        details: [],
+        details: [
+            { label: "Number of Ushers", value: "" },
+            { label: "Usher Names", value: "" }
+        ],
         actionItems: [
             { text: "Select ushers", completed: false },
             { text: "Brief ushers on duties", completed: false }
@@ -162,7 +230,10 @@ const DEFAULT_ITEMS = [
     {
         id: "R",
         title: "Cashiers",
-        details: [],
+        details: [
+            { label: "Number of Cashiers", value: "" },
+            { label: "Cashier Names", value: "" }
+        ],
         actionItems: [
             { text: "Select cashiers", completed: false },
             { text: "Prepare cash handling procedures", completed: false }
@@ -171,7 +242,9 @@ const DEFAULT_ITEMS = [
     {
         id: "S",
         title: "Candle Lighting",
-        details: [],
+        details: [
+            { label: "Candle Lighting Team", value: "" }
+        ],
         actionItems: [
             { text: "Arrange candle lighting ceremony", completed: false }
         ]
@@ -179,7 +252,9 @@ const DEFAULT_ITEMS = [
     {
         id: "T",
         title: "Cake Cutting",
-        details: [],
+        details: [
+            { label: "Cake Cutting Couple", value: "" }
+        ],
         actionItems: [
             { text: "Arrange cake cutting ceremony", completed: false }
         ]
@@ -187,7 +262,9 @@ const DEFAULT_ITEMS = [
     {
         id: "U",
         title: "Gift Management",
-        details: [],
+        details: [
+            { label: "Gift Custodians", value: "" }
+        ],
         actionItems: [
             { text: "Assign gift custodians", completed: false }
         ]
@@ -195,7 +272,10 @@ const DEFAULT_ITEMS = [
     {
         id: "V",
         title: "Champagne & Toasting",
-        details: [],
+        details: [
+            { label: "Champagne Quantity", value: "" },
+            { label: "Toasting Team", value: "" }
+        ],
         actionItems: [
             { text: "Order champagne", completed: false },
             { text: "Plan toasting ceremony", completed: false }
@@ -204,7 +284,9 @@ const DEFAULT_ITEMS = [
     {
         id: "W",
         title: "Chief Marshall",
-        details: [],
+        details: [
+            { label: "Chief Marshall Name", value: "" }
+        ],
         actionItems: [
             { text: "Appoint chief marshall", completed: false }
         ]
@@ -212,7 +294,10 @@ const DEFAULT_ITEMS = [
     {
         id: "X",
         title: "Farewell",
-        details: [],
+        details: [
+            { label: "Farewell Team", value: "" },
+            { label: "Number of People", value: "" }
+        ],
         actionItems: [
             { text: "Arrange farewell ceremony", completed: false }
         ]
@@ -220,7 +305,10 @@ const DEFAULT_ITEMS = [
     {
         id: "Y",
         title: "Float & Petty Cash",
-        details: [],
+        details: [
+            { label: "Float Amount", value: "" },
+            { label: "Responsible Person", value: "" }
+        ],
         actionItems: [
             { text: "Prepare float for vendors", completed: false }
         ]
@@ -228,7 +316,11 @@ const DEFAULT_ITEMS = [
     {
         id: "Z",
         title: "Budget Management",
-        details: [],
+        details: [
+            { label: "Total Budget", value: "" },
+            { label: "Amount Spent", value: "" },
+            { label: "Remaining Balance", value: "" }
+        ],
         actionItems: [
             { text: "Create wedding budget", completed: false },
             { text: "Track expenses", completed: false }
@@ -240,6 +332,8 @@ export default function Checklist() {
     const supabase = createClient();
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [seeding, setSeeding] = useState(false);
+    const [seedingProgress, setSeedingProgress] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
     const [activeId, setActiveId] = useState("A");
     const [newItemText, setNewItemText] = useState("");
@@ -269,6 +363,7 @@ export default function Checklist() {
             if (sectionsError) throw sectionsError;
 
             if (!sections || sections.length === 0) {
+                setSeeding(true);
                 await seedData(user.id);
                 return;
             }
@@ -305,7 +400,11 @@ export default function Checklist() {
 
     const seedData = async (userId) => {
         try {
-            for (const item of DEFAULT_ITEMS) {
+            const totalItems = DEFAULT_ITEMS.length;
+
+            for (let i = 0; i < DEFAULT_ITEMS.length; i++) {
+                const item = DEFAULT_ITEMS[i];
+
                 // Insert section
                 const { data: section, error: sectionError } = await supabase
                     .from('checklist_sections')
@@ -340,10 +439,16 @@ export default function Checklist() {
                         }))
                     );
                 }
+
+                // Update progress
+                setSeedingProgress(Math.round(((i + 1) / totalItems) * 100));
             }
-            fetchData();
+            await fetchData();
         } catch (error) {
             console.error('Error seeding data:', error);
+        } finally {
+            setSeeding(false);
+            setSeedingProgress(0);
         }
     };
 
@@ -466,10 +571,35 @@ export default function Checklist() {
         )
         : items.filter(item => item.id === activeId);
 
-    if (loading) {
+    if (loading || seeding) {
         return (
-            <div className="min-h-screen bg-base-100 flex items-center justify-center">
-                <span className="loading loading-spinner loading-lg text-primary"></span>
+            <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5 flex items-center justify-center">
+                <div className="text-center max-w-md w-full px-4">
+                    <span className="loading loading-spinner loading-lg text-primary mb-4"></span>
+                    <h2 className="text-2xl font-bold text-primary mb-2">
+                        {seeding ? "Setting Up Your Checklist" : "Loading Checklist"}
+                    </h2>
+                    <p className="text-base-content/60 mb-6">
+                        {seeding
+                            ? "Creating your personalized A-Z wedding checklist..."
+                            : "Just a moment..."}
+                    </p>
+
+                    {seeding && (
+                        <div className="w-full">
+                            <div className="flex justify-between text-sm text-base-content/60 mb-2">
+                                <span>Progress</span>
+                                <span>{seedingProgress}%</span>
+                            </div>
+                            <div className="w-full h-2 bg-base-200 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-primary rounded-full transition-all duration-300 ease-out"
+                                    style={{ width: `${seedingProgress}%` }}
+                                ></div>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }

@@ -214,20 +214,20 @@ export default function Budget() {
                         <div className="bg-base-100 p-6 rounded-xl shadow-sm border border-base-200 flex items-center gap-6">
                             <div className="flex flex-col gap-1">
                                 <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Total Budget</span>
-                                <span className="text-xl font-bold text-base-content">${totalBudget.toLocaleString()}</span>
+                                <span className="text-xl font-bold text-base-content">{totalBudget.toLocaleString()}</span>
                             </div>
                             <div className="w-px h-10 bg-base-200"></div>
                             <div className="flex flex-col gap-1">
                                 <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Spent</span>
                                 <span className="text-xl font-bold text-warning">
-                                    ${totalSpent.toLocaleString()}
+                                    {totalSpent.toLocaleString()}
                                 </span>
                             </div>
                             <div className="w-px h-10 bg-base-200"></div>
                             <div className="flex flex-col gap-1">
                                 <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Remaining</span>
                                 <span className="text-xl font-bold text-success">
-                                    ${remaining.toLocaleString()}
+                                    {remaining.toLocaleString()}
                                 </span>
                             </div>
                         </div>
@@ -417,7 +417,7 @@ export default function Budget() {
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-6">
-                                                <span className="font-semibold text-base-content">${expense.cost.toLocaleString()}</span>
+                                                <span className="font-semibold text-base-content">{expense.cost.toLocaleString()}</span>
                                                 <button
                                                     className={`px-3 py-1 rounded-full text-xs font-semibold border ${expense.paid ? 'bg-success/10 text-success border-success/20' : 'bg-base-200 text-base-content/60 border-base-300'}`}
                                                     onClick={() => togglePaid(expense.id, expense.paid)}

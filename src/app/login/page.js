@@ -38,8 +38,8 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-base-100 p-4">
-            <div className="w-full max-w-sm animate-[slideUp_0.6s_ease-out]">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-base-100 to-base-200 p-4">
+            <div className="w-full max-w-xs animate-[slideUp_0.6s_ease-out]">
                 <div className="flex justify-center mb-8">
                     <Link href="/">
                         <LogoIcon className="w-16 h-16 cursor-pointer" />

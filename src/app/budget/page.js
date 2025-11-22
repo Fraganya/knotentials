@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import styles from "./page.module.css";
 
 export default function Budget() {
     const [totalBudget, setTotalBudget] = useState(30000);
@@ -47,67 +46,67 @@ export default function Budget() {
     };
 
     return (
-        <div className={styles.container}>
-            <header className={styles.header}>
+        <div className="max-w-5xl mx-auto px-4 py-8">
+            <header className="flex flex-col items-start gap-6 mb-8 md:flex-row md:items-end md:justify-between">
                 <div>
-                    <h1 className={styles.title}>Budget Planner</h1>
-                    <p className={styles.subtitle}>Manage your wedding expenses</p>
+                    <h1 className="text-3xl font-bold text-primary mb-1">Budget Planner</h1>
+                    <p className="text-base-content/60">Manage your wedding expenses</p>
                 </div>
-                <div className={styles.summaryCard}>
-                    <div className={styles.summaryItem}>
-                        <span className={styles.summaryLabel}>Total Budget</span>
-                        <span className={styles.summaryValue}>${totalBudget.toLocaleString()}</span>
+                <div className="bg-base-100 p-6 rounded-xl shadow-md flex items-center gap-6 border border-base-200 w-full md:w-auto justify-between">
+                    <div className="flex flex-col gap-1">
+                        <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Total Budget</span>
+                        <span className="text-xl font-bold text-base-content">${totalBudget.toLocaleString()}</span>
                     </div>
-                    <div className={styles.divider}></div>
-                    <div className={styles.summaryItem}>
-                        <span className={styles.summaryLabel}>Spent</span>
-                        <span className={styles.summaryValue} style={{ color: 'var(--warning)' }}>
+                    <div className="w-px h-10 bg-base-200"></div>
+                    <div className="flex flex-col gap-1">
+                        <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Spent</span>
+                        <span className="text-xl font-bold text-warning">
                             ${totalSpent.toLocaleString()}
                         </span>
                     </div>
-                    <div className={styles.divider}></div>
-                    <div className={styles.summaryItem}>
-                        <span className={styles.summaryLabel}>Remaining</span>
-                        <span className={styles.summaryValue} style={{ color: 'var(--success)' }}>
+                    <div className="w-px h-10 bg-base-200"></div>
+                    <div className="flex flex-col gap-1">
+                        <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Remaining</span>
+                        <span className="text-xl font-bold text-success">
                             ${remaining.toLocaleString()}
                         </span>
                     </div>
                 </div>
             </header>
 
-            <div className={styles.progressBarContainer}>
-                <div className={styles.progressBar}>
+            <div className="mb-8 flex items-center gap-4">
+                <div className="flex-1 h-3 bg-base-200 rounded-full overflow-hidden">
                     <div
-                        className={styles.progressFill}
+                        className="h-full rounded-full transition-all duration-500 ease-out"
                         style={{ width: `${Math.min(percentSpent, 100)}%`, background: percentSpent > 100 ? 'var(--error)' : 'var(--primary)' }}
                     ></div>
                 </div>
-                <span className={styles.progressLabel}>{percentSpent}% Spent</span>
+                <span className="text-sm font-semibold text-base-content/60 min-w-[80px] text-right">{percentSpent}% Spent</span>
             </div>
 
-            <div className={styles.controls}>
+            <div className="mb-6">
                 <button className="btn btn-primary" onClick={() => setIsAdding(!isAdding)}>
                     {isAdding ? "Cancel" : "+ Add Expense"}
                 </button>
             </div>
 
             {isAdding && (
-                <form onSubmit={handleAddExpense} className={styles.addForm}>
-                    <div className={styles.formGroup}>
+                <form onSubmit={handleAddExpense} className="bg-base-100 p-6 rounded-lg border border-base-200 mb-6 flex flex-col gap-4 items-stretch animate-[slideDown_0.3s_ease-out] md:flex-row md:items-center">
+                    <div className="flex-1">
                         <input
                             type="text"
                             placeholder="Item Name"
                             value={newExpense.item}
                             onChange={(e) => setNewExpense({ ...newExpense, item: e.target.value })}
-                            className={styles.input}
+                            className="input-enhanced w-full"
                             autoFocus
                         />
                     </div>
-                    <div className={styles.formGroup}>
+                    <div className="flex-1">
                         <select
                             value={newExpense.category}
                             onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })}
-                            className={styles.select}
+                            className="select-enhanced w-full"
                         >
                             <option>Venue</option>
                             <option>Catering</option>
@@ -118,36 +117,36 @@ export default function Budget() {
                             <option>Other</option>
                         </select>
                     </div>
-                    <div className={styles.formGroup}>
+                    <div className="flex-1">
                         <input
                             type="number"
                             placeholder="Cost"
                             value={newExpense.cost}
                             onChange={(e) => setNewExpense({ ...newExpense, cost: e.target.value })}
-                            className={styles.input}
+                            className="input-enhanced w-full"
                         />
                     </div>
                     <button type="submit" className="btn btn-secondary">Save</button>
                 </form>
             )}
 
-            <div className={styles.expenseList}>
+            <div className="flex flex-col gap-2">
                 {expenses.map((expense) => (
-                    <div key={expense.id} className={styles.expenseItem}>
-                        <div className={styles.expenseInfo}>
-                            <span className={styles.categoryTag}>{expense.category}</span>
-                            <span className={styles.expenseName}>{expense.item}</span>
+                    <div key={expense.id} className="bg-base-100 px-6 py-4 rounded-lg border border-base-200 flex justify-between items-center transition-all duration-150 hover:border-primary/30 hover:translate-x-1">
+                        <div className="flex items-center gap-4">
+                            <span className="text-xs bg-base-200 px-3 py-1 rounded-full text-base-content/60 font-medium uppercase">{expense.category}</span>
+                            <span className="font-medium text-base-content">{expense.item}</span>
                         </div>
-                        <div className={styles.expenseActions}>
-                            <span className={styles.expenseCost}>${expense.cost.toLocaleString()}</span>
+                        <div className="flex items-center gap-6">
+                            <span className="font-semibold text-base-content">${expense.cost.toLocaleString()}</span>
                             <button
-                                className={`${styles.statusBtn} ${expense.paid ? styles.paid : ''}`}
+                                className={`px-3 py-1 rounded-full text-xs font-semibold border ${expense.paid ? 'bg-success/10 text-success border-success/20' : 'bg-base-200 text-base-content/60 border-base-300'}`}
                                 onClick={() => togglePaid(expense.id)}
                             >
                                 {expense.paid ? "Paid" : "Unpaid"}
                             </button>
                             <button
-                                className={styles.deleteBtn}
+                                className="text-base-content/40 text-2xl leading-none px-1 hover:text-error"
                                 onClick={() => deleteExpense(expense.id)}
                                 aria-label="Delete expense"
                             >

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./page.module.css";
 
 export default function Onboarding() {
     const router = useRouter();
@@ -27,25 +26,25 @@ export default function Onboarding() {
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.formWrapper}>
+        <div className="min-h-screen flex items-center justify-center bg-base-100 p-4">
+            <div className="w-full max-w-lg animate-[slideUp_0.6s_ease-out]">
 
 
-                <div className={styles.progress}>
-                    <div className={`${styles.step} ${step >= 1 ? styles.active : ""}`}>1</div>
-                    <div className={styles.line}></div>
-                    <div className={`${styles.step} ${step >= 2 ? styles.active : ""}`}>2</div>
-                    <div className={styles.line}></div>
-                    <div className={`${styles.step} ${step >= 3 ? styles.active : ""}`}>3</div>
-                </div>
+                <ul className="steps-enhanced mb-8">
+                    <li className={`step ${step >= 1 ? 'step-primary' : ''}`}>Partner</li>
+                    <li className={`step ${step >= 2 ? 'step-primary' : ''}`}>Date</li>
+                    <li className={`step ${step >= 3 ? 'step-primary' : ''}`}>Budget</li>
+                </ul>
 
-                <form onSubmit={handleNext} className={styles.form}>
+                <form onSubmit={handleNext} className="flex flex-col gap-8">
                     {step === 1 && (
-                        <div className={styles.stepContent}>
-                            <h2>Who's the lucky partner?</h2>
-                            <p>Let's personalize your experience.</p>
-                            <div className={styles.inputGroup}>
-                                <label htmlFor="partnerName">Partner's Name</label>
+                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">Who's the lucky partner?</h2>
+                            <p className="text-base-content/60 text-sm mb-6">Let's personalize your experience.</p>
+                            <div className="form-control w-full">
+                                <label htmlFor="partnerName" className="label">
+                                    <span className="label-text font-medium">Partner's Name</span>
+                                </label>
                                 <input
                                     type="text"
                                     id="partnerName"
@@ -54,17 +53,20 @@ export default function Onboarding() {
                                     placeholder="Enter partner's name"
                                     required
                                     autoFocus
+                                    className="input-enhanced w-full"
                                 />
                             </div>
                         </div>
                     )}
 
                     {step === 2 && (
-                        <div className={styles.stepContent}>
-                            <h2>When is the big day?</h2>
-                            <p>We'll help you stay on track.</p>
-                            <div className={styles.inputGroup}>
-                                <label htmlFor="date">Wedding Date</label>
+                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">When is the big day?</h2>
+                            <p className="text-base-content/60 text-sm mb-6">We'll help you stay on track.</p>
+                            <div className="form-control w-full">
+                                <label htmlFor="date" className="label">
+                                    <span className="label-text font-medium">Wedding Date</span>
+                                </label>
                                 <input
                                     type="date"
                                     id="date"
@@ -72,17 +74,20 @@ export default function Onboarding() {
                                     onChange={handleChange}
                                     required
                                     autoFocus
+                                    className="input-enhanced w-full"
                                 />
                             </div>
                         </div>
                     )}
 
                     {step === 3 && (
-                        <div className={styles.stepContent}>
-                            <h2>What's your budget?</h2>
-                            <p>Don't worry, you can change this later.</p>
-                            <div className={styles.inputGroup}>
-                                <label htmlFor="budget">Total Budget</label>
+                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">What's your budget?</h2>
+                            <p className="text-base-content/60 text-sm mb-6">Don't worry, you can change this later.</p>
+                            <div className="form-control w-full">
+                                <label htmlFor="budget" className="label">
+                                    <span className="label-text font-medium">Total Budget</span>
+                                </label>
                                 <input
                                     type="number"
                                     id="budget"
@@ -91,12 +96,13 @@ export default function Onboarding() {
                                     placeholder="25000"
                                     required
                                     autoFocus
+                                    className="input-enhanced w-full"
                                 />
                             </div>
                         </div>
                     )}
 
-                    <button type="submit" className={styles.submitButton}>
+                    <button type="submit" className="btn btn-primary w-full">
                         {step === 3 ? "Finish Setup" : "Next"}
                     </button>
                 </form>

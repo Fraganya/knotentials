@@ -21,13 +21,11 @@ export default function Dashboard() {
     const [wedding, setWedding] = useState(null);
     const [budgetSpent, setBudgetSpent] = useState(0);
     const [budgetTotal, setBudgetTotal] = useState(0);
+    const [tasksCompleted, setTasksCompleted] = useState(0);
+    const [tasksTotal, setTasksTotal] = useState(0);
     const [loading, setLoading] = useState(true);
 
-    // Mock data for tasks (to be replaced later)
-    const tasksCompleted = 24;
-    const tasksTotal = 86;
-
-    const progress = Math.round((tasksCompleted / tasksTotal) * 100);
+    const progress = tasksTotal > 0 ? Math.round((tasksCompleted / tasksTotal) * 100) : 0;
     const budgetProgress = budgetTotal > 0 ? Math.round((budgetSpent / budgetTotal) * 100) : 0;
 
     useEffect(() => {
@@ -51,15 +49,35 @@ export default function Dashboard() {
                     setBudgetTotal(weddingData.total_budget);
                 }
 
-                // Fetch budget items to calculate spent
-                const { data: expenses } = await supabase
+                // Fetch budget items to calculate spent amount
+                const { data: budgetItems } = await supabase
                     .from('budget_items')
-                    .select('cost, paid')
-                    .eq('user_id', user.id);
+                    .select('amount, is_paid')
+                    .eq('wedding_id', weddingData.id);
 
-                if (expenses) {
-                    const spent = expenses.reduce((acc, curr) => acc + (curr.paid ? curr.cost : 0), 0);
+                if (budgetItems) {
+                    const spent = budgetItems
+                        .filter(item => item.is_paid)
+                        .reduce((sum, item) => sum + (item.amount || 0), 0);
                     setBudgetSpent(spent);
+                }
+
+                // Fetch checklist items to calculate completion
+                const { data: checklistItems } = await supabase
+                    .from('checklist_items')
+                    .select('completed, section_id')
+                    .in('section_id', (
+                        await supabase
+                            .from('checklist_sections')
+                            .select('id')
+                            .eq('user_id', user.id)
+                    ).data?.map(s => s.id) || []);
+
+                if (checklistItems) {
+                    const total = checklistItems.length;
+                    const completed = checklistItems.filter(item => item.completed).length;
+                    setTasksTotal(total);
+                    setTasksCompleted(completed);
                 }
             }
 

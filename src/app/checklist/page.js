@@ -713,12 +713,12 @@ export default function Checklist() {
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="max-w-3xl mx-auto">
                     {!searchTerm && (
-                        <div className="flex overflow-x-auto pb-4 mb-6 gap-2 no-scrollbar mask-linear-fade">
+                        <div className="flex flex-wrap gap-2 pb-4 mb-6">
                             {alphabet.map((letter) => (
                                 <button
                                     key={letter}
                                     onClick={() => setActiveId(letter)}
-                                    className={`btn btn-circle btn-sm flex-shrink-0 ${activeId === letter ? 'btn-primary' : 'btn-ghost bg-base-200/50'}`}
+                                    className={`btn btn-circle btn-sm ${activeId === letter ? 'btn-primary' : 'btn-ghost bg-base-200/50'}`}
                                 >
                                     {letter}
                                 </button>

@@ -35,9 +35,9 @@ export default function Countdown({ targetDate }) {
     }, [targetDate]);
 
     return (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-start gap-4">
             <span className="text-sm font-medium uppercase tracking-widest text-base-content/60">Counting Down</span>
-            <div className="grid grid-flow-col gap-5 text-center auto-cols-max justify-center">
+            <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
                 <div className="flex flex-col p-3 bg-base-100 rounded-box text-primary shadow-sm border border-base-200 min-w-[80px]">
                     <span className="countdown font-mono text-5xl">
                         <span style={{ "--value": timeLeft.days }}></span>

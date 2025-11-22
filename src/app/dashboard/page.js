@@ -42,13 +42,13 @@ export default function Dashboard() {
                     </div>
                 </header>
 
-                <div className="mb-12 flex justify-center">
+                <div className="mb-12">
                     <Countdown targetDate="2026-10-15T00:00:00" />
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-4">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-4">
                     {/* Budget Card */}
-                    <Link href="/budget" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-xl hover:shadow-md transition-shadow">
+                    <Link href="/budget" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-serif font-semibold text-lg text-primary-dark">Budget</h3>
                             <span className="text-2xl">💰</span>
@@ -66,9 +66,9 @@ export default function Dashboard() {
                     </Link>
 
                     {/* Checklist Card */}
-                    <Link href="/checklist" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-xl hover:shadow-md transition-shadow">
+                    <Link href="/checklist" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="font-serif font-semibold text-lg text-primary-dark">Checklist</h3>
+                            <h3 className="font-serif font-semibold text-lg text-primary-dark">A-Z Checklist</h3>
                             <span className="text-2xl">✅</span>
                         </div>
                         <div>
@@ -84,7 +84,7 @@ export default function Dashboard() {
                     </Link>
 
                     {/* Guest List Card */}
-                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-xl">
+                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-serif font-semibold text-lg text-primary-dark">Guests</h3>
                             <span className="text-2xl">👥</span>
@@ -108,7 +108,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Vendors Card */}
-                    <Link href="/vendors" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-xl hover:shadow-md transition-shadow">
+                    <Link href="/vendors" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-serif font-semibold text-lg text-primary-dark">Vendors</h3>
                             <span className="text-2xl">🏪</span>
@@ -117,6 +117,28 @@ export default function Dashboard() {
                             <p className="text-sm text-base-content/60">Manage your vendors</p>
                         </div>
                     </Link>
+
+                    {/* Ideas Card */}
+                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-pointer">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="font-serif font-semibold text-lg text-primary-dark">Ideas</h3>
+                            <span className="text-2xl">💡</span>
+                        </div>
+                        <div>
+                            <p className="text-sm text-base-content/60">Checkout ideas for your wedding, from fun games, colors, styles</p>
+                        </div>
+                    </div>
+
+                    {/* More Tools Card */}
+                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200 cursor-pointer">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="font-serif font-semibold text-lg text-primary-dark">More Tools</h3>
+                            <span className="text-2xl">🛠️</span>
+                        </div>
+                        <div>
+                            <p className="text-sm text-base-content/60">Wedding site, message book etc.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

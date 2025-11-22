@@ -59,6 +59,12 @@ export default function Dashboard() {
         router.refresh();
     };
 
+    // Helper function to get first name
+    const getFirstName = (fullName) => {
+        if (!fullName) return null;
+        return fullName.split(' ')[0];
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -67,14 +73,17 @@ export default function Dashboard() {
         );
     }
 
+    const userFirstName = getFirstName(user?.user_metadata?.full_name) || user?.email || "Guest";
+    const partnerFirstName = getFirstName(wedding?.partner_name);
+
     return (
         <div className="border border-primary border-2 min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
             <div className="max-w-5xl mx-auto px-4 py-8">
                 <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 pb-6 border-b border-base-300">
                     <div className="flex-1">
                         <h1 className="text-3xl font-bold text-primary mb-1">
-                            Welcome, {user?.user_metadata?.full_name || user?.email || "Guest"}
-                            {wedding?.partner_name && ` & ${wedding.partner_name}`}
+                            Welcome, {userFirstName}
+                            {partnerFirstName && ` & ${partnerFirstName}`}
                         </h1>
                         <p className="text-lg text-base-content/60">
                             {wedding?.wedding_date

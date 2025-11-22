@@ -33,8 +33,10 @@ export default function Signup() {
 
             if (signUpError) throw signUpError;
 
+            // User is automatically logged in after signup
             // Redirect to onboarding after successful signup
             router.push("/onboarding");
+            router.refresh();
         } catch (err) {
             setError(err.message || "An error occurred during signup");
         } finally {

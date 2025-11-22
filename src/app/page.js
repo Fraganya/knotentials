@@ -26,24 +26,31 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-6 mt-8 text-base-content/50 text-sm uppercase tracking-widest sm:gap-4 sm:text-xs">
+        <div className="flex flex-wrap items-center justify-center gap-6 mt-8 
+                text-base-content/50 text-sm uppercase tracking-widest 
+                sm:gap-4 sm:text-xs">
+
           <div className="font-medium font-sans">
             <h3>Budget</h3>
           </div>
           <div className="text-primary/50">•</div>
+
           <div className="font-medium font-sans">
             <h3>Checklist</h3>
           </div>
-          <div className="text-primary/50">•</div>
-          <div className="font-medium font-sans">
+          {/* Hidden on small screens */}
+          <div className="hidden sm:block text-primary/50">•</div>
+          <div className="hidden sm:block font-medium font-sans">
             <h3>Guests</h3>
           </div>
+
           <div className="text-primary/50">•</div>
           <div className="font-medium font-sans">
             <h3>Ideas</h3>
           </div>
-          <div className="text-primary/50">•</div>
-          <div className="font-medium font-sans">
+
+          <div className="hidden sm:block text-primary/50">•</div>
+          <div className="hidden sm:block font-medium font-sans">
             <h3>Vendors</h3>
           </div>
         </div>

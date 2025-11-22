@@ -31,14 +31,29 @@ export async function middleware(request) {
         data: { user },
     } = await supabase.auth.getUser()
 
-    // Protect dashboard, onboarding, budget, checklist, vendors routes
-    const protectedRoutes = ['/dashboard', '/onboarding', '/budget', '/checklist', '/vendors']
+    // Protect dashboard, budget, checklist, vendors routes (not onboarding)
+    const protectedRoutes = ['/dashboard', '/budget', '/checklist', '/vendors']
     const isProtectedRoute = protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route))
 
     if (isProtectedRoute && !user) {
         const url = request.nextUrl.clone()
         url.pathname = '/login'
         return NextResponse.redirect(url)
+    }
+
+    // Check if user has completed onboarding (for protected routes except onboarding itself)
+    if (isProtectedRoute && user) {
+        const { data: wedding } = await supabase
+            .from('weddings')
+            .select('id')
+            .eq('user_id', user.id)
+            .single()
+
+        if (!wedding) {
+            const url = request.nextUrl.clone()
+            url.pathname = '/onboarding'
+            return NextResponse.redirect(url)
+        }
     }
 
     // Redirect authenticated users away from login/signup

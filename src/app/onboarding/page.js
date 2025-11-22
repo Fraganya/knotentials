@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "../../lib/supabase/client";
 
 export default function Onboarding() {
     const router = useRouter();
     const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const [formData, setFormData] = useState({
         partnerName: "",
         date: "",
@@ -15,13 +18,47 @@ export default function Onboarding() {
         setFormData({ ...formData, [e.target.id]: e.target.value });
     };
 
-    const handleNext = (e) => {
+    const handleNext = async (e) => {
         e.preventDefault();
+        setError("");
+
         if (step < 3) {
             setStep(step + 1);
         } else {
-            // Save data and redirect
-            router.push("/dashboard");
+            // Save data to Supabase
+            setLoading(true);
+            try {
+                const supabase = createClient();
+
+                // Get current user
+                const { data: { user } } = await supabase.auth.getUser();
+
+                if (!user) {
+                    throw new Error("Not authenticated");
+                }
+
+                // Insert or update wedding data
+                const { error: dbError } = await supabase
+                    .from('weddings')
+                    .upsert({
+                        user_id: user.id,
+                        partner_name: formData.partnerName,
+                        wedding_date: formData.date,
+                        budget: formData.budget ? parseFloat(formData.budget) : null,
+                        updated_at: new Date().toISOString(),
+                    }, {
+                        onConflict: 'user_id'
+                    });
+
+                if (dbError) throw dbError;
+
+                // Redirect to dashboard
+                router.push("/dashboard");
+                router.refresh();
+            } catch (err) {
+                setError(err.message || "Failed to save wedding data");
+                setLoading(false);
+            }
         }
     };
 
@@ -102,8 +139,14 @@ export default function Onboarding() {
                         </div>
                     )}
 
-                    <button type="submit" className="btn btn-primary w-full">
-                        {step === 3 ? "Finish Setup" : "Next"}
+                    {error && (
+                        <div className="alert alert-error">
+                            <span>{error}</span>
+                        </div>
+                    )}
+
+                    <button type="submit" className="btn btn-primary w-full" disabled={loading}>
+                        {loading ? "Saving..." : step === 3 ? "Finish Setup" : "Next"}
                     </button>
                 </form>
             </div>

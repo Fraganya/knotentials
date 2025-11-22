@@ -8,6 +8,7 @@ import { createClient } from "../../lib/supabase/client";
 export default function Dashboard() {
     const router = useRouter();
     const [user, setUser] = useState(null);
+    const [wedding, setWedding] = useState(null);
     const [loading, setLoading] = useState(true);
 
     // Mock data
@@ -22,11 +23,26 @@ export default function Dashboard() {
     useEffect(() => {
         const supabase = createClient();
 
-        // Get initial user
-        supabase.auth.getUser().then(({ data: { user } }) => {
+        // Get initial user and wedding data
+        const fetchData = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
+
+            if (user) {
+                // Fetch wedding data
+                const { data: weddingData } = await supabase
+                    .from('weddings')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .single();
+
+                setWedding(weddingData);
+            }
+
             setLoading(false);
-        });
+        };
+
+        fetchData();
 
         // Listen for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -58,8 +74,14 @@ export default function Dashboard() {
                     <div className="flex-1">
                         <h1 className="text-3xl font-bold text-primary mb-1">
                             Welcome, {user?.user_metadata?.full_name || user?.email || "Guest"}
+                            {wedding?.partner_name && ` & ${wedding.partner_name}`}
                         </h1>
-                        <p className="text-lg text-base-content/60">October 15, 2026</p>
+                        <p className="text-lg text-base-content/60">
+                            {wedding?.wedding_date
+                                ? new Date(wedding.wedding_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+                                : 'Set your wedding date in onboarding'
+                            }
+                        </p>
                     </div>
 
                     <div className="flex items-center gap-4 self-start md:self-center">
@@ -80,7 +102,9 @@ export default function Dashboard() {
                 </header>
 
                 <div className="mb-12">
-                    <Countdown targetDate="2026-10-15T00:00:00" />
+                    {wedding?.wedding_date && (
+                        <Countdown targetDate={wedding.wedding_date} />
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-4">

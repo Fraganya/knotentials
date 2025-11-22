@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import icon from "./icon.png";
+import LogoIcon from "../components/LogoIcon";
 
 export default function Home() {
   return (
@@ -8,14 +7,7 @@ export default function Home() {
       <main className="w-full max-w-4xl px-4 py-12 flex flex-col items-center gap-12 text-center">
         <div className="flex flex-col items-center w-full animate-[fadeIn_1s_ease-out]">
           <div className="mb-6 relative">
-            <Image
-              src={icon}
-              alt="Knotentials Logo"
-              width={80}
-              height={80}
-              className="rounded-lg shadow-md"
-              priority
-            />
+            <LogoIcon className="w-24 h-24" />
           </div>
           <h1 className="text-6xl mb-2 tracking-tighter text-primary font-medium sm:text-5xl">
             Knotentials

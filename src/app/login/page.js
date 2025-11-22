@@ -1,20 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
-import icon from "../icon.png";
+import LogoIcon from "../../components/LogoIcon";
 
 export default function Login() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-100 p-4">
-            <div className="w-full max-w-md animate-[slideUp_0.6s_ease-out]">
+            <div className="w-full max-w-sm animate-[slideUp_0.6s_ease-out]">
                 <div className="flex justify-center mb-8">
-                    <Image
-                        src={icon}
-                        alt="Knotentials Logo"
-                        width={60}
-                        height={60}
-                        className="opacity-90"
-                        priority
-                    />
+                    <Link href="/">
+                        <LogoIcon className="w-16 h-16 cursor-pointer" />
+                    </Link>
                 </div>
 
                 <h1 className="text-center text-3xl font-semibold mb-2 text-base-content sm:text-2xl">Welcome Back</h1>
@@ -25,14 +19,14 @@ export default function Login() {
                         <label htmlFor="email" className="label">
                             <span className="label-text font-medium">Email</span>
                         </label>
-                        <input type="email" id="email" placeholder="your@email.com" required className="input-enhanced w-full" />
+                        <input type="email" id="email" placeholder="your@email.com" required className="input input-bordered w-full" />
                     </div>
 
                     <div className="form-control w-full">
                         <label htmlFor="password" className="label">
                             <span className="label-text font-medium">Password</span>
                         </label>
-                        <input type="password" id="password" placeholder="Enter your password" required className="input-enhanced w-full" />
+                        <input type="password" id="password" placeholder="Enter your password" required className="input input-bordered w-full" />
                     </div>
 
                     <div className="text-right -mt-2">

@@ -30,7 +30,7 @@ export default function Onboarding() {
             <div className="w-full max-w-lg animate-[slideUp_0.6s_ease-out]">
 
 
-                <ul className="steps-enhanced mb-8">
+                <ul className="steps w-full mb-8">
                     <li className={`step ${step >= 1 ? 'step-primary' : ''}`}>Partner</li>
                     <li className={`step ${step >= 2 ? 'step-primary' : ''}`}>Date</li>
                     <li className={`step ${step >= 3 ? 'step-primary' : ''}`}>Budget</li>
@@ -38,9 +38,9 @@ export default function Onboarding() {
 
                 <form onSubmit={handleNext} className="flex flex-col gap-8">
                     {step === 1 && (
-                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
-                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">Who's the lucky partner?</h2>
-                            <p className="text-base-content/60 text-sm mb-6">Let's personalize your experience.</p>
+                        <div className="animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl text-center">Who's the lucky partner?</h2>
+                            <p className="text-base-content/60 text-sm mb-6 text-center">Let's personalize your experience.</p>
                             <div className="form-control w-full">
                                 <label htmlFor="partnerName" className="label">
                                     <span className="label-text font-medium">Partner's Name</span>
@@ -53,16 +53,16 @@ export default function Onboarding() {
                                     placeholder="Enter partner's name"
                                     required
                                     autoFocus
-                                    className="input-enhanced w-full"
+                                    className="input input-bordered w-full"
                                 />
                             </div>
                         </div>
                     )}
 
                     {step === 2 && (
-                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
-                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">When is the big day?</h2>
-                            <p className="text-base-content/60 text-sm mb-6">We'll help you stay on track.</p>
+                        <div className="animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl text-center">When is the big day?</h2>
+                            <p className="text-base-content/60 text-sm mb-6 text-center">We'll help you stay on track.</p>
                             <div className="form-control w-full">
                                 <label htmlFor="date" className="label">
                                     <span className="label-text font-medium">Wedding Date</span>
@@ -74,16 +74,16 @@ export default function Onboarding() {
                                     onChange={handleChange}
                                     required
                                     autoFocus
-                                    className="input-enhanced w-full"
+                                    className="input input-bordered w-full"
                                 />
                             </div>
                         </div>
                     )}
 
                     {step === 3 && (
-                        <div className="text-center animate-[fadeIn_0.4s_ease-out]">
-                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl">What's your budget?</h2>
-                            <p className="text-base-content/60 text-sm mb-6">Don't worry, you can change this later.</p>
+                        <div className="animate-[fadeIn_0.4s_ease-out]">
+                            <h2 className="text-2xl font-semibold mb-2 text-base-content sm:text-2xl text-center">What's your budget?</h2>
+                            <p className="text-base-content/60 text-sm mb-6 text-center">Don't worry, you can change this later.</p>
                             <div className="form-control w-full">
                                 <label htmlFor="budget" className="label">
                                     <span className="label-text font-medium">Total Budget</span>
@@ -96,7 +96,7 @@ export default function Onboarding() {
                                     placeholder="25000"
                                     required
                                     autoFocus
-                                    className="input-enhanced w-full"
+                                    className="input input-bordered w-full"
                                 />
                             </div>
                         </div>

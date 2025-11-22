@@ -23,6 +23,8 @@ export default function Dashboard() {
     const [budgetTotal, setBudgetTotal] = useState(0);
     const [tasksCompleted, setTasksCompleted] = useState(0);
     const [tasksTotal, setTasksTotal] = useState(0);
+    const [guestsTotal, setGuestsTotal] = useState(0);
+    const [guestsConfirmed, setGuestsConfirmed] = useState(0);
     const [loading, setLoading] = useState(true);
 
     const progress = tasksTotal > 0 ? Math.round((tasksCompleted / tasksTotal) * 100) : 0;
@@ -78,6 +80,19 @@ export default function Dashboard() {
                     const completed = checklistItems.filter(item => item.completed).length;
                     setTasksTotal(total);
                     setTasksCompleted(completed);
+                }
+
+                // Fetch guest data
+                const { data: guestData } = await supabase
+                    .from('guests')
+                    .select('confirmed')
+                    .eq('user_id', user.id);
+
+                if (guestData) {
+                    const total = guestData.length;
+                    const confirmed = guestData.filter(guest => guest.confirmed).length;
+                    setGuestsTotal(total);
+                    setGuestsConfirmed(confirmed);
                 }
             }
 
@@ -195,28 +210,28 @@ export default function Dashboard() {
                     </Link>
 
                     {/* Guest List Card */}
-                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm">
+                    <Link href="/guests" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-serif font-semibold text-lg text-primary-dark">Guests</h3>
                             <IconUsers className="w-8 h-8 text-primary/80" />
                         </div>
                         <div>
                             <div className="text-2xl font-semibold text-base-content mb-2">
-                                <span>128</span>
+                                <span>{guestsTotal}</span>
                                 <span className="text-base text-base-content/60 font-normal"> invited</span>
                             </div>
                             <div className="flex gap-4 mt-1">
                                 <div className="flex items-center gap-2 text-sm text-base-content/60">
                                     <span className="w-2 h-2 rounded-full bg-success"></span>
-                                    85 Yes
+                                    <span>{guestsConfirmed} confirmed</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-sm text-base-content/60">
                                     <span className="w-2 h-2 rounded-full bg-warning"></span>
-                                    12 Pending
+                                    <span>{guestsTotal - guestsConfirmed} pending</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Vendors Card */}
                     <Link href="/vendors" className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-sm hover:shadow-lg hover:scale-105 hover:border-primary/30 hover:bg-primary/5 transition-all duration-200">

@@ -341,6 +341,8 @@ export default function Checklist() {
     const [newDetailLabel, setNewDetailLabel] = useState("");
     const [newDetailValue, setNewDetailValue] = useState("");
     const [addingDetailToSection, setAddingDetailToSection] = useState(null);
+    const [editingDetail, setEditingDetail] = useState(null);
+    const [editDetailValue, setEditDetailValue] = useState("");
 
     const alphabet = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
@@ -520,6 +522,34 @@ export default function Checklist() {
         }
     };
 
+    const handleUpdateDetail = async (sectionId, detailId) => {
+        try {
+            const { error } = await supabase
+                .from('checklist_details')
+                .update({ value: editDetailValue })
+                .eq('id', detailId);
+
+            if (error) throw error;
+
+            setItems(items.map(item => {
+                if (item.id === sectionId) {
+                    return {
+                        ...item,
+                        details: item.details.map(d =>
+                            d.id === detailId ? { ...d, value: editDetailValue } : d
+                        )
+                    };
+                }
+                return item;
+            }));
+
+            setEditingDetail(null);
+            setEditDetailValue("");
+        } catch (error) {
+            console.error('Error updating detail:', error);
+        }
+    };
+
     const handleAddDetail = async (sectionId, dbId) => {
         if (!newDetailLabel.trim() || !newDetailValue.trim()) return;
 
@@ -676,10 +706,53 @@ export default function Checklist() {
                                             <h3 className="text-xs uppercase tracking-wider text-base-content/60 mb-3 font-semibold">Details</h3>
                                             {item.details && item.details.length > 0 && (
                                                 <div className="flex flex-col gap-3 mb-3">
-                                                    {item.details.map((detail, index) => (
-                                                        <div key={index} className="flex flex-col gap-0.5">
+                                                    {item.details.map((detail) => (
+                                                        <div key={detail.id} className="flex flex-col gap-0.5">
                                                             <span className="text-xs text-base-content/60">{detail.label}</span>
-                                                            <span className="font-medium text-sm text-base-content">{detail.value}</span>
+                                                            {editingDetail === detail.id ? (
+                                                                <div className="flex gap-2">
+                                                                    <input
+                                                                        type="text"
+                                                                        className="input input-sm input-bordered w-full"
+                                                                        value={editDetailValue}
+                                                                        onChange={(e) => setEditDetailValue(e.target.value)}
+                                                                        onKeyDown={(e) => {
+                                                                            if (e.key === 'Enter') handleUpdateDetail(item.id, detail.id);
+                                                                            if (e.key === 'Escape') {
+                                                                                setEditingDetail(null);
+                                                                                setEditDetailValue("");
+                                                                            }
+                                                                        }}
+                                                                        autoFocus
+                                                                    />
+                                                                    <button
+                                                                        className="btn btn-sm btn-square btn-primary"
+                                                                        onClick={() => handleUpdateDetail(item.id, detail.id)}
+                                                                    >
+                                                                        <IconCheck className="w-4 h-4" />
+                                                                    </button>
+                                                                    <button
+                                                                        className="btn btn-sm btn-square btn-ghost"
+                                                                        onClick={() => {
+                                                                            setEditingDetail(null);
+                                                                            setEditDetailValue("");
+                                                                        }}
+                                                                    >
+                                                                        <IconX className="w-4 h-4" />
+                                                                    </button>
+                                                                </div>
+                                                            ) : (
+                                                                <span
+                                                                    className={`font-medium text-sm cursor-pointer hover:text-primary transition-colors ${detail.value ? 'text-base-content' : 'text-base-content/40 italic'
+                                                                        }`}
+                                                                    onClick={() => {
+                                                                        setEditingDetail(detail.id);
+                                                                        setEditDetailValue(detail.value);
+                                                                    }}
+                                                                >
+                                                                    {detail.value || 'Click to add...'}
+                                                                </span>
+                                                            )}
                                                         </div>
                                                     ))}
                                                 </div>

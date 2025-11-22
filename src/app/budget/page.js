@@ -196,42 +196,47 @@ export default function Budget() {
                     </div>
                 </div>
             )}
-            <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
-                <div className="max-w-5xl mx-auto px-4 py-8">
-                    <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 pb-6 border-b border-base-300">
-                        <div className="flex items-center gap-4">
-                            <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </Link>
-                            <div>
-                                <h1 className="text-3xl font-bold text-primary mb-1">Budget Planner</h1>
-                                <p className="text-base-content/60">Manage your wedding expenses</p>
+            <div className="min-h-screen bg-gradient-to-b from-base-100 via-base-100 to-primary/10">
+                <header className="bg-primary/2 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
+                    <div className="max-w-5xl mx-auto px-4 py-4">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div className="flex items-center gap-4 flex-1">
+                                <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </Link>
+                                <div>
+                                    <h1 className="text-3xl font-bold text-primary mb-1">Budget Planner</h1>
+                                    <p className="text-base-content/60">Manage your wedding expenses</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="bg-base-100 p-6 rounded-xl shadow-sm border border-base-200 flex items-center gap-6">
-                            <div className="flex flex-col gap-1">
-                                <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Total Budget</span>
-                                <span className="text-xl font-bold text-base-content">{totalBudget.toLocaleString()}</span>
-                            </div>
-                            <div className="w-px h-10 bg-base-200"></div>
-                            <div className="flex flex-col gap-1">
-                                <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Spent</span>
-                                <span className="text-xl font-bold text-warning">
-                                    {totalSpent.toLocaleString()}
-                                </span>
-                            </div>
-                            <div className="w-px h-10 bg-base-200"></div>
-                            <div className="flex flex-col gap-1">
-                                <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Remaining</span>
-                                <span className="text-xl font-bold text-success">
-                                    {remaining.toLocaleString()}
-                                </span>
+                            <div className="bg-base-100 p-4 rounded-xl shadow-sm border border-base-200 flex items-center gap-4">
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Total Budget</span>
+                                    <span className="text-xl font-bold text-base-content">{totalBudget.toLocaleString()}</span>
+                                </div>
+                                <div className="w-px h-10 bg-base-200"></div>
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Spent</span>
+                                    <span className="text-xl font-bold text-warning">
+                                        {totalSpent.toLocaleString()}
+                                    </span>
+                                </div>
+                                <div className="w-px h-10 bg-base-200"></div>
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-xs uppercase tracking-wider text-base-content/60 font-semibold">Remaining</span>
+                                    <span className="text-xl font-bold text-success">
+                                        {remaining.toLocaleString()}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </header>
+                    </div>
+                </header>
+
+                <div className="max-w-5xl mx-auto px-4 py-8">
 
                     <div className="mb-8 flex items-center gap-4">
                         <div className="flex-1 h-3 bg-base-200 rounded-full overflow-hidden">

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "../../lib/supabase/client";
 import Link from "next/link";
-import { IconChevronLeft, IconSearch, IconPlus, IconX, IconCheck } from "@tabler/icons-react";
+import { IconChevronLeft, IconSearch, IconPlus, IconX, IconCheck, IconTrash } from "@tabler/icons-react";
 
 // Default seed data
 const DEFAULT_ITEMS = [
@@ -371,7 +371,7 @@ export default function Checklist() {
             }
 
             // Fetch details and items
-            const { data: details } = await supabase.from('checklist_details').select('*');
+            const { data: details } = await supabase.from('checklist_details').select('*').order('created_at');
             const { data: actionItems } = await supabase.from('checklist_items').select('*').order('created_at');
 
             // Assemble data structure
@@ -550,6 +550,52 @@ export default function Checklist() {
         }
     };
 
+    const handleDeleteDetail = async (sectionId, detailId) => {
+        try {
+            const { error } = await supabase
+                .from('checklist_details')
+                .delete()
+                .eq('id', detailId);
+
+            if (error) throw error;
+
+            setItems(items.map(item => {
+                if (item.id === sectionId) {
+                    return {
+                        ...item,
+                        details: item.details.filter(d => d.id !== detailId)
+                    };
+                }
+                return item;
+            }));
+        } catch (error) {
+            console.error('Error deleting detail:', error);
+        }
+    };
+
+    const handleDeleteActionItem = async (sectionId, actionId) => {
+        try {
+            const { error } = await supabase
+                .from('checklist_items')
+                .delete()
+                .eq('id', actionId);
+
+            if (error) throw error;
+
+            setItems(items.map(item => {
+                if (item.id === sectionId) {
+                    return {
+                        ...item,
+                        actionItems: item.actionItems.filter(a => a.id !== actionId)
+                    };
+                }
+                return item;
+            }));
+        } catch (error) {
+            console.error('Error deleting action item:', error);
+        }
+    };
+
     const handleAddDetail = async (sectionId, dbId) => {
         if (!newDetailLabel.trim() || !newDetailValue.trim()) return;
 
@@ -636,42 +682,50 @@ export default function Checklist() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
-            <div className="max-w-7xl mx-auto px-4 py-8">
-                <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 pb-6 border-b border-base-300">
-                    <div className="flex items-center gap-4">
-                        <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
-                            <IconChevronLeft className="w-6 h-6" />
-                        </Link>
-                        <div>
-                            <h1 className="text-3xl font-bold text-primary mb-1">Wedding Checklist</h1>
-                            <p className="text-base-content/60">Stay organized from A to Z</p>
+            <header className="bg-primary/2 backdrop-blur-md border-b border-base-200 sticky top-0 z-50">
+                <div className="max-w-7xl mx-auto px-4 py-4">
+                    <div className="max-w-3xl mx-auto">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div className="flex items-center gap-4 flex-1">
+                                <Link href="/dashboard" className="btn btn-circle btn-ghost hover:bg-base-200">
+                                    <IconChevronLeft className="w-6 h-6" />
+                                </Link>
+                                <div>
+                                    <h1 className="text-3xl font-bold text-primary mb-1">Wedding Checklist</h1>
+                                    <p className="text-base-content/60">Stay organized from A to Z</p>
+                                </div>
+                            </div>
+                            <div className="relative w-full md:w-64">
+                                <input
+                                    type="text"
+                                    placeholder="Search checklist..."
+                                    className="input input-bordered w-full pl-10"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <IconSearch className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40" />
+                            </div>
                         </div>
                     </div>
-                    <div className="relative w-full md:w-64">
-                        <input
-                            type="text"
-                            placeholder="Search checklist..."
-                            className="input input-bordered w-full pl-10"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <IconSearch className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-base-content/40" />
-                    </div>
-                </header>
+                </div>
+            </header>
 
-                {!searchTerm && (
-                    <div className="flex overflow-x-auto pb-4 mb-6 gap-2 no-scrollbar mask-linear-fade">
-                        {alphabet.map((letter) => (
-                            <button
-                                key={letter}
-                                onClick={() => setActiveId(letter)}
-                                className={`btn btn-circle btn-sm flex-shrink-0 ${activeId === letter ? 'btn-primary' : 'btn-ghost bg-base-200/50'}`}
-                            >
-                                {letter}
-                            </button>
-                        ))}
-                    </div>
-                )}
+            <div className="max-w-7xl mx-auto px-4 py-8">
+                <div className="max-w-3xl mx-auto">
+                    {!searchTerm && (
+                        <div className="flex overflow-x-auto pb-4 mb-6 gap-2 no-scrollbar mask-linear-fade">
+                            {alphabet.map((letter) => (
+                                <button
+                                    key={letter}
+                                    onClick={() => setActiveId(letter)}
+                                    className={`btn btn-circle btn-sm flex-shrink-0 ${activeId === letter ? 'btn-primary' : 'btn-ghost bg-base-200/50'}`}
+                                >
+                                    {letter}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
                 <div className={searchTerm ? "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 items-start" : "max-w-3xl mx-auto"}>
                     {filteredItems.map((item) => {
@@ -705,10 +759,19 @@ export default function Checklist() {
                                         <div className="mb-6 bg-base-200/50 p-4 rounded-lg">
                                             <h3 className="text-xs uppercase tracking-wider text-base-content/60 mb-3 font-semibold">Details</h3>
                                             {item.details && item.details.length > 0 && (
-                                                <div className="flex flex-col gap-3 mb-3">
+                                                <div className="grid grid-cols-2 gap-3 mb-3">
                                                     {item.details.map((detail) => (
-                                                        <div key={detail.id} className="flex flex-col gap-0.5">
-                                                            <span className="text-xs text-base-content/60">{detail.label}</span>
+                                                        <div key={detail.id} className="flex flex-col gap-0.5 group relative">
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs text-base-content/60">{detail.label}</span>
+                                                                <button
+                                                                    className="btn btn-xs btn-ghost btn-circle opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                    onClick={() => handleDeleteDetail(item.id, detail.id)}
+                                                                    title="Delete detail"
+                                                                >
+                                                                    <IconTrash className="w-3 h-3 text-error" />
+                                                                </button>
+                                                            </div>
                                                             {editingDetail === detail.id ? (
                                                                 <div className="flex gap-2">
                                                                     <input
@@ -817,15 +880,27 @@ export default function Checklist() {
                                             <h3 className="text-xs uppercase tracking-wider text-base-content/60 mb-2 font-semibold">Action Items</h3>
                                             <div className="flex flex-col gap-2">
                                                 {item.actionItems && item.actionItems.map((action) => (
-                                                    <label key={action.id} className={`flex items-start gap-3 p-2 rounded-lg cursor-pointer transition-colors hover:bg-base-200/50 ${action.completed ? 'completed' : ''}`}>
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={action.completed}
-                                                            onChange={() => toggleActionItem(item.id, action.id)}
-                                                            className="checkbox checkbox-primary checkbox-xs mt-1"
-                                                        />
-                                                        <span className={`text-sm transition-colors ${action.completed ? 'line-through text-base-content/40' : 'text-base-content'}`}>{action.text}</span>
-                                                    </label>
+                                                    <div key={action.id} className="group relative">
+                                                        <label className={`flex items-start gap-3 p-2 rounded-lg cursor-pointer transition-colors hover:bg-base-200/50 ${action.completed ? 'completed' : ''}`}>
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={action.completed}
+                                                                onChange={() => toggleActionItem(item.id, action.id)}
+                                                                className="checkbox checkbox-primary checkbox-xs mt-1"
+                                                            />
+                                                            <span className={`text-sm transition-colors flex-1 ${action.completed ? 'line-through text-base-content/40' : 'text-base-content'}`}>{action.text}</span>
+                                                            <button
+                                                                className="btn btn-xs btn-ghost btn-circle opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    handleDeleteActionItem(item.id, action.id);
+                                                                }}
+                                                                title="Delete action item"
+                                                            >
+                                                                <IconTrash className="w-3 h-3 text-error" />
+                                                            </button>
+                                                        </label>
+                                                    </div>
                                                 ))}
 
                                                 {addingToSection === item.id ? (

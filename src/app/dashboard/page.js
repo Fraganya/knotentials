@@ -1,9 +1,15 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Countdown from "../../components/Countdown";
+import { createClient } from "../../lib/supabase/client";
 
 export default function Dashboard() {
+    const router = useRouter();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     // Mock data
     const budgetSpent = 12500;
     const budgetTotal = 30000;
@@ -12,16 +18,47 @@ export default function Dashboard() {
 
     const progress = Math.round((tasksCompleted / tasksTotal) * 100);
     const budgetProgress = Math.round((budgetSpent / budgetTotal) * 100);
-    const [partnerName, setPartnerName] = useState("");
-    const [partnerAdded, setPartnerAdded] = useState(false);
+
+    useEffect(() => {
+        const supabase = createClient();
+
+        // Get initial user
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            setUser(user);
+            setLoading(false);
+        });
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const handleLogout = async () => {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        router.push("/login");
+        router.refresh();
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <span className="loading loading-spinner loading-lg text-primary"></span>
+            </div>
+        );
+    }
 
     return (
-
         <div className="border border-primary border-2 min-h-screen bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
             <div className="max-w-5xl mx-auto px-4 py-8">
                 <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 pb-6 border-b border-base-300">
                     <div className="flex-1">
-                        <h1 className="text-3xl font-bold text-primary mb-1">Welcome, Jane & John</h1>
+                        <h1 className="text-3xl font-bold text-primary mb-1">
+                            Welcome, {user?.user_metadata?.full_name || user?.email || "Guest"}
+                        </h1>
                         <p className="text-lg text-base-content/60">October 15, 2026</p>
                     </div>
 
@@ -33,11 +70,11 @@ export default function Dashboard() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </button>
-                            <Link href="/login" className="btn btn-circle btn-ghost hover:bg-base-200" aria-label="Logout">
+                            <button onClick={handleLogout} className="btn btn-circle btn-ghost hover:bg-base-200" aria-label="Logout">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                 </svg>
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </header>
